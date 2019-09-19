@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">Trending Hub</string>
+    <string name="text_trending">Trending</string>
 </resources>
