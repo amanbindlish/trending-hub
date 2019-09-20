@@ -2,4 +2,10 @@
 <resources>
     <dimen name="toolbar_height">56dp</dimen>
     <dimen name="toolbar_title_size">21dp</dimen>
+    <dimen name="more_button_width">24dp</dimen>
+    <dimen name="more_button_height">24dp</dimen>
+    <dimen name="placeholder_img_width">36dp</dimen>
+    <dimen name="placeholder_img_height">36dp</dimen>
+    <dimen name="placeholder_small_txt_width">100dp</dimen>
+    <dimen name="placeholder_large_text_width">260dp</dimen>
 </resources>

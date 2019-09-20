@@ -56,6 +56,8 @@ dependencies {
     // android lifecycle
     implementation "android.arch.lifecycle:extensions:$lifecycleExtensionsVersion"
     kapt "android.arch.lifecycle:compiler:$lifecycleExtensionsVersion"
+    // shimmer effect lib
+    implementation 'com.facebook.shimmer:shimmer:0.4.0'
 
     // testing libs
     testImplementation 'junit:junit:4.12'

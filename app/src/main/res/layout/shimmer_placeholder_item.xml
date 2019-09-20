@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@+id/placeholder_image"
+        android:layout_alignBottom="@+id/placeholder_image"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="36dp"
+        android:layout_toEndOf="@+id/placeholder_image"
+        android:orientation="vertical">
+
+        <View
+            android:layout_width="@dimen/placeholder_small_txt_width"
+            android:layout_height="8dp"
+            android:background="@drawable/linear_text_placeholder" />
+
+        <View
+            android:layout_width="@dimen/placeholder_large_text_width"
+            android:layout_height="8dp"
+            android:layout_marginTop="16dp"
+            android:background="@drawable/linear_text_placeholder" />
+    </LinearLayout>
+
+    <View
+        android:id="@+id/placeholder_image"
+        android:layout_width="@dimen/placeholder_img_width"
+        android:layout_height="@dimen/placeholder_img_height"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="21dp"
+        android:layout_marginBottom="21dp"
+        android:background="@drawable/circular_placeholder" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_below="@+id/placeholder_image"
+        android:background="@color/placeholder_bg" />
+</RelativeLayout>
