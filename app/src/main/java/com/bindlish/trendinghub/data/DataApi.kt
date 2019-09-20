@@ -1,7 +1,6 @@
 package com.bindlish.trendinghub.data
 
 import io.reactivex.Observable
-import retrofit2.Response
 import retrofit2.http.GET
 
 /**
@@ -10,5 +9,5 @@ import retrofit2.http.GET
 interface DataApi {
 
     @GET("repositories")
-    fun fetchRepositories(): Observable<Response<List<GitRepoData>>>
+    fun fetchRepositories(): Observable<List<GitRepoData>>
 }
