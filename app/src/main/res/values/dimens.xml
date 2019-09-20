@@ -10,4 +10,8 @@
     <dimen name="placeholder_large_text_width">260dp</dimen>
     <dimen name="author_text_size">12dp</dimen>
     <dimen name="repo_name_text_size">15dp</dimen>
+    <dimen name="retry_button_height">48dp</dimen>
+    <dimen name="retry_text_size">15dp</dimen>
+    <dimen name="alien_text_size">15dp</dimen>
+    <dimen name="something_text_size">18dp</dimen>
 </resources>

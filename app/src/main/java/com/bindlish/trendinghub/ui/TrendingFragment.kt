@@ -18,6 +18,7 @@ import com.bindlish.trendinghub.ui.adapter.TrendingListAdapter
 import com.bindlish.trendinghub.viewmodel.TrendingViewModel
 import com.bindlish.trendinghub.viewmodel.ViewModelFactory
 import dagger.android.support.AndroidSupportInjection
+import kotlinx.android.synthetic.main.error_layout.*
 import kotlinx.android.synthetic.main.fragment_trending.*
 import javax.inject.Inject
 
@@ -81,6 +82,15 @@ class TrendingFragment : Fragment(), SwipeRefreshLayout.OnRefreshListener {
         // observe live data from repository
         viewModel.getRepositoryLiveData().observe(viewLifecycleOwner, Observer { repositories ->
             displayReposData(repositories)
+        })
+        // observe error layout status
+        viewModel.getLoadingErrorStatus().observe(viewLifecycleOwner, Observer {
+            if (it && listAdapter.itemCount == 0) {
+                error_layout.visibility = View.VISIBLE
+                hideShimmer()
+            } else {
+                error_layout.visibility = View.GONE
+            }
         })
     }
 
