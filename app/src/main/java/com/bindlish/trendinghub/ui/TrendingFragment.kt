@@ -10,7 +10,9 @@ import androidx.lifecycle.ViewModelProviders
 import com.bindlish.trendinghub.R
 import com.bindlish.trendinghub.databinding.TrendingFragmentBinding
 import com.bindlish.trendinghub.viewmodel.TrendingViewModel
+import com.bindlish.trendinghub.viewmodel.ViewModelFactory
 import kotlinx.android.synthetic.main.fragment_trending.*
+import javax.inject.Inject
 
 class TrendingFragment : Fragment() {
 
@@ -18,6 +20,8 @@ class TrendingFragment : Fragment() {
         fun newInstance() = TrendingFragment()
     }
 
+    @Inject
+    private lateinit var viewModelFactory: ViewModelFactory
     private lateinit var binding: TrendingFragmentBinding
     private lateinit var viewModel: TrendingViewModel
 
@@ -36,8 +40,7 @@ class TrendingFragment : Fragment() {
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-        viewModel = ViewModelProviders.of(this).get(TrendingViewModel::class.java)
-        // TODO: Use the ViewModel
+        viewModel = ViewModelProviders.of(this, viewModelFactory).get(TrendingViewModel::class.java)
     }
 
     // starting shimmer effect in onResume
