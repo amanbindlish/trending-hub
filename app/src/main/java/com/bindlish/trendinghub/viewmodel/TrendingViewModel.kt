@@ -25,6 +25,7 @@ class TrendingViewModel @Inject constructor(dataApi: DataApi) : ViewModel() {
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe { repoList ->
                 repoList?.let {
+                    repositories.clear()
                     repositories.addAll(it)
                     repositoryListLiveData.postValue(repositories)
                 }

@@ -20,6 +20,7 @@ class TrendingListAdapter : RecyclerView.Adapter<TrendingListAdapter.TrendingVie
     private var expandedPos = -1
 
     fun setRepositories(repos: List<GitRepoData>) {
+        repositories.clear()
         repositories.addAll(repos)
         notifyDataSetChanged()
     }

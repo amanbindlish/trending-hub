@@ -10,6 +10,7 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import com.bindlish.trendinghub.R
 import com.bindlish.trendinghub.data.GitRepoData
 import com.bindlish.trendinghub.databinding.TrendingFragmentBinding
@@ -20,7 +21,7 @@ import dagger.android.support.AndroidSupportInjection
 import kotlinx.android.synthetic.main.fragment_trending.*
 import javax.inject.Inject
 
-class TrendingFragment : Fragment() {
+class TrendingFragment : Fragment(), SwipeRefreshLayout.OnRefreshListener {
 
     companion object {
         fun newInstance() = TrendingFragment()
@@ -31,6 +32,11 @@ class TrendingFragment : Fragment() {
     private lateinit var binding: TrendingFragmentBinding
     private lateinit var viewModel: TrendingViewModel
     private lateinit var listAdapter: TrendingListAdapter
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        retainInstance = true
+    }
 
     override fun onAttach(context: Context?) {
         AndroidSupportInjection.inject(this)
@@ -63,6 +69,8 @@ class TrendingFragment : Fragment() {
             adapter = listAdapter
             setHasFixedSize(true)
         }
+        // setup pull to refresh
+        swipe_refresh.setOnRefreshListener(this)
         // hit api if view model doesn't have data, else show directly (for configuration changes)
         if (viewModel.getRepositories().isEmpty()) {
             showShimmer()
@@ -71,11 +79,17 @@ class TrendingFragment : Fragment() {
             displayReposData(viewModel.getRepositories())
         }
         // observe live data from repository
-        viewModel.getRepositoryLiveData().observe(this, Observer { repositories ->
+        viewModel.getRepositoryLiveData().observe(viewLifecycleOwner, Observer { repositories ->
             displayReposData(repositories)
         })
     }
 
+    // method will be called on pull to refresh
+    override fun onRefresh() {
+        viewModel.fetchRepositories()
+    }
+
+    // method to display data into list after fetching from repository
     private fun displayReposData(repositories: List<GitRepoData>) {
         listAdapter.setRepositories(repositories)
         hideShimmer()
@@ -88,14 +102,19 @@ class TrendingFragment : Fragment() {
         super.onPause()
     }
 
+    // method to show and start shimmer effect
     private fun showShimmer() {
         shimmer_view_container.visibility = View.VISIBLE
         shimmer_view_container.startShimmer()
     }
 
+    // method to hide and stop shimmer affect
     private fun hideShimmer() {
         shimmer_view_container.stopShimmer()
         shimmer_view_container.visibility = View.GONE
+        if (swipe_refresh.isRefreshing) {
+            swipe_refresh.isRefreshing = false
+        }
     }
 
 }
