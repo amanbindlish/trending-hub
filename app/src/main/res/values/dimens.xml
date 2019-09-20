@@ -8,4 +8,6 @@
     <dimen name="placeholder_img_height">36dp</dimen>
     <dimen name="placeholder_small_txt_width">100dp</dimen>
     <dimen name="placeholder_large_text_width">260dp</dimen>
+    <dimen name="author_text_size">12dp</dimen>
+    <dimen name="repo_name_text_size">15dp</dimen>
 </resources>

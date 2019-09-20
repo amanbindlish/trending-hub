@@ -6,4 +6,5 @@
 
     <color name="title_color">#25282B</color>
     <color name="placeholder_bg">#E8E8E8</color>
+    <color name="repo_author_color">#52575C</color>
 </resources>
