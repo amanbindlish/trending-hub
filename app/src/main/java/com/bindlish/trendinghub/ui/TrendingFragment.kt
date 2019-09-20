@@ -61,9 +61,11 @@ class TrendingFragment : Fragment() {
             layoutManager = LinearLayoutManager(activity)
             listAdapter = TrendingListAdapter()
             adapter = listAdapter
+            setHasFixedSize(true)
         }
         // hit api if view model doesn't have data, else show directly (for configuration changes)
         if (viewModel.getRepositories().isEmpty()) {
+            showShimmer()
             viewModel.fetchRepositories()
         } else {
             displayReposData(viewModel.getRepositories())
@@ -78,12 +80,6 @@ class TrendingFragment : Fragment() {
         listAdapter.setRepositories(repositories)
         hideShimmer()
         binding.reposRecycler.scheduleLayoutAnimation()
-    }
-
-    // starting shimmer effect in onResume
-    override fun onResume() {
-        super.onResume()
-        showShimmer()
     }
 
     // stop shimmer effect in onPause

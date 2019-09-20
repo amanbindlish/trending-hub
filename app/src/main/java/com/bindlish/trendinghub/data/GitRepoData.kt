@@ -15,11 +15,12 @@ data class GitRepoData(
     @SerializedName("url")
     var url: String,
     @SerializedName("language")
-    var language: String,
+    var language: String?,
     @SerializedName("languageColor")
-    var languageColor: String,
+    var languageColor: String?,
     @SerializedName("stars")
     var stars: String,
     @SerializedName("forks")
-    var forks: String
+    var forks: String,
+    var isExpanded: Boolean
 )
