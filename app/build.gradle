@@ -31,6 +31,7 @@ def daggerVersion = '2.16'
 def glideVersion = '4.8.0'
 def mockitoVersion = '2.11.0'
 def rxJavaVersion = '2.0.1'
+def roomVersion = "1.1.1"
 
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
@@ -63,6 +64,10 @@ dependencies {
     implementation 'com.facebook.shimmer:shimmer:0.4.0'
     // circular image view lib
     implementation 'de.hdodenhof:circleimageview:3.0.1'
+    // Room
+    implementation "android.arch.persistence.room:runtime:$roomVersion"
+    kapt "android.arch.persistence.room:compiler:$roomVersion"
+    androidTestImplementation "android.arch.persistence.room:testing:$roomVersion"
 
     // testing libs
     testImplementation 'junit:junit:4.12'

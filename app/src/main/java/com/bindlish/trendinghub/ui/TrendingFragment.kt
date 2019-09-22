@@ -13,6 +13,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import com.bindlish.trendinghub.R
 import com.bindlish.trendinghub.data.GitRepoData
+import com.bindlish.trendinghub.data.network.Status
 import com.bindlish.trendinghub.databinding.TrendingFragmentBinding
 import com.bindlish.trendinghub.ui.adapter.TrendingListAdapter
 import com.bindlish.trendinghub.viewmodel.TrendingViewModel
@@ -72,38 +73,50 @@ class TrendingFragment : Fragment(), SwipeRefreshLayout.OnRefreshListener {
         }
         // setup pull to refresh
         swipe_refresh.setOnRefreshListener(this)
-        // hit api if view model doesn't have data, else show directly (for configuration changes)
-        if (viewModel.getRepositories().isEmpty()) {
-            showShimmer()
-            viewModel.fetchRepositories()
-        } else {
-            displayReposData(viewModel.getRepositories())
+        viewModel.apply {
+            // observe live data from repository
+            getRepositoryLiveData().observe(viewLifecycleOwner, Observer {
+                if (it.status == Status.SUCCESS) {
+                    displayReposData(it.data)
+                } else if (it.status == Status.LOADING) {
+                    showShimmer()
+                    error_layout.visibility = View.GONE
+                } else {
+                    hideShimmer()
+                    error_layout.visibility = View.VISIBLE
+                }
+            })
+            // observe error layout status
+            getLoadingErrorStatus().observe(viewLifecycleOwner, Observer {
+                if (it && listAdapter.itemCount == 0) {
+                    error_layout.visibility = View.VISIBLE
+                    hideShimmer()
+                } else {
+                    error_layout.visibility = View.GONE
+                }
+            })
         }
-        // observe live data from repository
-        viewModel.getRepositoryLiveData().observe(viewLifecycleOwner, Observer { repositories ->
-            displayReposData(repositories)
-        })
-        // observe error layout status
-        viewModel.getLoadingErrorStatus().observe(viewLifecycleOwner, Observer {
-            if (it && listAdapter.itemCount == 0) {
-                error_layout.visibility = View.VISIBLE
-                hideShimmer()
-            } else {
-                error_layout.visibility = View.GONE
-            }
-        })
+        // handling click for retry, hit api and show shimmer
+        retry_button.setOnClickListener {
+            onRefresh()
+            error_layout.visibility = View.GONE
+            showShimmer()
+        }
     }
 
     // method will be called on pull to refresh
     override fun onRefresh() {
-        viewModel.fetchRepositories()
+        //TODO put logic for pull to refresh
     }
 
     // method to display data into list after fetching from repository
-    private fun displayReposData(repositories: List<GitRepoData>) {
-        listAdapter.setRepositories(repositories)
-        hideShimmer()
-        binding.reposRecycler.scheduleLayoutAnimation()
+    private fun displayReposData(repositories: List<GitRepoData>?) {
+        repositories?.let {
+            listAdapter.setRepositories(repositories)
+            error_layout.visibility = View.GONE
+            hideShimmer()
+            binding.reposRecycler.scheduleLayoutAnimation()
+        }
     }
 
     // stop shimmer effect in onPause

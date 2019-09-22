@@ -1,11 +1,16 @@
 package com.bindlish.trendinghub.data
 
+import androidx.room.Entity
+import androidx.room.PrimaryKey
 import com.google.gson.annotations.SerializedName
 
 /**
  * Created by Aman Bindlish on 20,September,2019
  */
+@Entity(tableName = "repositories")
 data class GitRepoData(
+    @PrimaryKey(autoGenerate = true)
+    var id: Long = 0,
     @SerializedName("author")
     var author: String,
     @SerializedName("name")

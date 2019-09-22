@@ -1,6 +1,7 @@
 package com.bindlish.trendinghub.data
 
-import io.reactivex.Observable
+import androidx.lifecycle.LiveData
+import com.bindlish.trendinghub.data.network.Resource
 import retrofit2.http.GET
 
 /**
@@ -9,5 +10,5 @@ import retrofit2.http.GET
 interface DataApi {
 
     @GET("repositories")
-    fun fetchRepositories(): Observable<List<GitRepoData>>
+    fun fetchRepositories(): LiveData<Resource<List<GitRepoData>>>
 }
