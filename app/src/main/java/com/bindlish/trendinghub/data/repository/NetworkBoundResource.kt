@@ -4,6 +4,7 @@ import androidx.annotation.MainThread
 import androidx.annotation.WorkerThread
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MediatorLiveData
+import androidx.lifecycle.MutableLiveData
 import com.bindlish.trendinghub.data.network.Resource
 
 /**
@@ -85,7 +86,7 @@ abstract class NetworkBoundResource<ResultType, RequestType> @MainThread constru
 
     protected fun onFetchFailed() {}
 
-    fun asLiveData(): LiveData<Resource<ResultType?>> {
+    fun asLiveData(): MutableLiveData<Resource<ResultType?>> {
         return result
     }
 

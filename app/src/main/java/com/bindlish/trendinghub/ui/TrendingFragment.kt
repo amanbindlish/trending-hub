@@ -74,39 +74,30 @@ class TrendingFragment : Fragment(), SwipeRefreshLayout.OnRefreshListener {
         // setup pull to refresh
         swipe_refresh.setOnRefreshListener(this)
         viewModel.apply {
+            fetchUpdatedData(false)
             // observe live data from repository
             getRepositoryLiveData().observe(viewLifecycleOwner, Observer {
-                if (it.status == Status.SUCCESS) {
-                    displayReposData(it.data)
-                } else if (it.status == Status.LOADING) {
-                    showShimmer()
-                    error_layout.visibility = View.GONE
-                } else {
-                    hideShimmer()
-                    error_layout.visibility = View.VISIBLE
+                when (it.status) {
+                    Status.SUCCESS -> displayReposData(it.data)
+                    Status.LOADING -> displayLoadingView()
+                    Status.ERROR -> displayErrorLayout()
                 }
             })
             // observe error layout status
             getLoadingErrorStatus().observe(viewLifecycleOwner, Observer {
-                if (it && listAdapter.itemCount == 0) {
-                    error_layout.visibility = View.VISIBLE
-                    hideShimmer()
-                } else {
-                    error_layout.visibility = View.GONE
-                }
+                if (it) displayErrorLayout()
+                else error_layout.visibility = View.GONE
             })
         }
         // handling click for retry, hit api and show shimmer
         retry_button.setOnClickListener {
             onRefresh()
-            error_layout.visibility = View.GONE
-            showShimmer()
         }
     }
 
     // method will be called on pull to refresh
     override fun onRefresh() {
-        //TODO put logic for pull to refresh
+        viewModel.fetchUpdatedData(true)
     }
 
     // method to display data into list after fetching from repository
@@ -123,6 +114,24 @@ class TrendingFragment : Fragment(), SwipeRefreshLayout.OnRefreshListener {
     override fun onPause() {
         hideShimmer()
         super.onPause()
+    }
+
+    // method to show loading view
+    private fun displayLoadingView() {
+        if (listAdapter.itemCount == 0) {
+            showShimmer()
+        }
+        error_layout.visibility = View.GONE
+    }
+
+    // method to show error layout
+    private fun displayErrorLayout() {
+        if (listAdapter.itemCount == 0) {
+            error_layout.visibility = View.VISIBLE
+        } else {
+            error_layout.visibility = View.GONE
+        }
+        hideShimmer()
     }
 
     // method to show and start shimmer effect

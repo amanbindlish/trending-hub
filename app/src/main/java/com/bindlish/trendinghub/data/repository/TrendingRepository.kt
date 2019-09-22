@@ -3,6 +3,7 @@ package com.bindlish.trendinghub.data.repository
 import android.os.SystemClock
 import android.util.ArrayMap
 import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
 import com.bindlish.trendinghub.data.DataApi
 import com.bindlish.trendinghub.data.GitRepoData
 import com.bindlish.trendinghub.data.network.Resource
@@ -27,14 +28,14 @@ class TrendingRepository @Inject constructor(
         var timeOutMap: ArrayMap<String, Long> = ArrayMap()
     }
 
-    fun getRepositories(): LiveData<Resource<List<GitRepoData>?>> =
+    fun getRepositories(forceRefresh: Boolean = false): MutableLiveData<Resource<List<GitRepoData>?>> =
         object : NetworkBoundResource<List<GitRepoData>, List<GitRepoData>>(appRequestExecutors) {
             override fun saveCallResult(item: List<GitRepoData>) {
                 dataDao.deleteAndInsertRepos(item)
             }
 
             override fun shouldFetch(data: List<GitRepoData>?): Boolean =
-                data == null || data.isEmpty() || isCacheTimedOut("repositories")
+                data == null || data.isEmpty() || isCacheTimedOut("repositories") || forceRefresh
 
             override fun loadFromDb(): LiveData<List<GitRepoData>> = dataDao.getRepositories()
 
@@ -44,7 +45,7 @@ class TrendingRepository @Inject constructor(
         }.asLiveData()
 
     // method to check cache timeout of a request
-    fun isCacheTimedOut(key: String): Boolean {
+    private fun isCacheTimedOut(key: String): Boolean {
         val lastFetched = timeOutMap[key]
         val now = SystemClock.uptimeMillis()
         if (lastFetched == null || (now - lastFetched) > TIMEOUT) {
