@@ -1,6 +1,8 @@
 package com.bindlish.trendinghub.ui
 
+import android.os.Build
 import android.os.Bundle
+import android.view.View
 import android.widget.PopupMenu
 import androidx.appcompat.app.AppCompatActivity
 import com.bindlish.trendinghub.R
@@ -11,6 +13,12 @@ class TrendingActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.main_activity)
+
+        window.apply {
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+                decorView.systemUiVisibility = View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR
+            }
+        }
 
         // casting custom toolbar and set it as action bar
         setSupportActionBar(toolbar)
