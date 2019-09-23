@@ -24,4 +24,13 @@ interface RepositoriesDao {
         deleteAll()
         insertRepositories(repos)
     }
+
+    @Transaction
+    fun deleteAndInsertWithTimeStamp(repos: List<GitRepoData>) {
+        deleteAndInsertRepos(repos.apply {
+            for (data in this) {
+                data.createdAt = System.currentTimeMillis()
+            }
+        })
+    }
 }
