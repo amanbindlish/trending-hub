@@ -1,9 +1,9 @@
 package com.bindlish.trendinghub.ui
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.widget.PopupMenu
+import androidx.appcompat.app.AppCompatActivity
 import com.bindlish.trendinghub.R
-import com.bindlish.trendinghub.ui.TrendingFragment
 import kotlinx.android.synthetic.main.toolbar.*
 
 class TrendingActivity : AppCompatActivity() {
@@ -20,9 +20,33 @@ class TrendingActivity : AppCompatActivity() {
 
         if (savedInstanceState == null) {
             supportFragmentManager.beginTransaction()
-                .replace(R.id.container, TrendingFragment.newInstance())
+                .replace(R.id.container, TrendingFragment.newInstance(), TrendingFragment.TAG)
                 .commitNow()
         }
+        // handle click for three dots on top right of toolbar
+        more_button.setOnClickListener {
+            showSortingPopup()
+        }
+
+    }
+
+    // method to create and show popup to show sorting items
+    private fun showSortingPopup() {
+        val popupMenu = PopupMenu(this, more_button)
+        // inflating menu items
+        popupMenu.inflate(R.menu.sorting_menu)
+        // handling click of items
+        popupMenu.setOnMenuItemClickListener {
+            val fragment =
+                supportFragmentManager.findFragmentByTag(TrendingFragment.TAG) as TrendingFragment
+            when (it.itemId) {
+                R.id.action_names -> fragment?.sortByNames()
+                R.id.action_stars -> fragment?.sortByStars()
+            }
+            true
+        }
+        // show popup
+        popupMenu.show()
     }
 
 }

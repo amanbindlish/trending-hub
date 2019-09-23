@@ -16,6 +16,7 @@
             android:layout_height="match_parent">
 
             <ImageButton
+                android:id="@+id/more_button"
                 style="@style/Widget.AppCompat.ActionButton"
                 android:layout_width="@dimen/more_button_width"
                 android:layout_height="@dimen/more_button_height"

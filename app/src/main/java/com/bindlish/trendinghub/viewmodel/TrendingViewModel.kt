@@ -20,11 +20,7 @@ class TrendingViewModel @Inject constructor(private val dataRepository: Trending
             { input -> dataRepository.getRepositories(input) }
         )
 
-    private val loadingError = MutableLiveData<Boolean>()
-
     fun getRepositoryLiveData() = repositoryListLiveData
-
-    fun getLoadingErrorStatus() = loadingError
 
     fun fetchUpdatedData(forceRefresh: Boolean) {
         repoData.value = forceRefresh

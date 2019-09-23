@@ -21,11 +21,13 @@ import com.bindlish.trendinghub.viewmodel.ViewModelFactory
 import dagger.android.support.AndroidSupportInjection
 import kotlinx.android.synthetic.main.error_layout.*
 import kotlinx.android.synthetic.main.fragment_trending.*
+import java.util.*
 import javax.inject.Inject
 
 class TrendingFragment : Fragment(), SwipeRefreshLayout.OnRefreshListener {
 
     companion object {
+        const val TAG = "trending_fragment"
         fun newInstance() = TrendingFragment()
     }
 
@@ -83,11 +85,6 @@ class TrendingFragment : Fragment(), SwipeRefreshLayout.OnRefreshListener {
                     Status.ERROR -> displayErrorLayout()
                 }
             })
-            // observe error layout status
-            getLoadingErrorStatus().observe(viewLifecycleOwner, Observer {
-                if (it) displayErrorLayout()
-                else error_layout.visibility = View.GONE
-            })
         }
         // handling click for retry, hit api and show shimmer
         retry_button.setOnClickListener {
@@ -98,6 +95,32 @@ class TrendingFragment : Fragment(), SwipeRefreshLayout.OnRefreshListener {
     // method will be called on pull to refresh
     override fun onRefresh() {
         viewModel.fetchUpdatedData(true)
+    }
+
+    // method to sort repo list by names using comparator and notify adapter
+    fun sortByNames() {
+        // first check if there is data in list
+        viewModel.getRepositoryLiveData().value?.let {
+            if (!it.data.isNullOrEmpty()) {
+                // sort in ascending
+                Collections.sort(it.data,
+                    kotlin.Comparator { t1, t2 -> t1.name.compareTo(t2.name, ignoreCase = true) })
+                listAdapter.setRepositories(it.data)
+            }
+        }
+    }
+
+    // method to sort repo list by stars using comparator and notify adapter
+    fun sortByStars() {
+        // first check if there is data in list
+        viewModel.getRepositoryLiveData().value?.let {
+            if (!it.data.isNullOrEmpty()) {
+                // sort in ascending
+                Collections.sort(it.data,
+                    kotlin.Comparator { t1, t2 -> t1.stars.toInt().compareTo(t2.stars.toInt()) })
+                listAdapter.setRepositories(it.data)
+            }
+        }
     }
 
     // method to display data into list after fetching from repository

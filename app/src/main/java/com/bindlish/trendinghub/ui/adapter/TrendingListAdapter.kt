@@ -19,10 +19,12 @@ class TrendingListAdapter : RecyclerView.Adapter<TrendingListAdapter.TrendingVie
     private val repositories: MutableList<GitRepoData> = mutableListOf()
     private var expandedPos = -1
 
-    fun setRepositories(repos: List<GitRepoData>) {
+    fun setRepositories(repos: List<GitRepoData>?) {
         repositories.clear()
-        repositories.addAll(repos)
-        notifyDataSetChanged()
+        repos?.let {
+            repositories.addAll(it)
+            notifyDataSetChanged()
+        }
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): TrendingViewHolder {

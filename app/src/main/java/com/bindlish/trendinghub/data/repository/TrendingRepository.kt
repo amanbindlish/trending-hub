@@ -1,6 +1,5 @@
 package com.bindlish.trendinghub.data.repository
 
-import android.os.SystemClock
 import android.util.ArrayMap
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
@@ -28,6 +27,7 @@ class TrendingRepository @Inject constructor(
         var timeOutMap: ArrayMap<String, Long> = ArrayMap()
     }
 
+    // fetch repositories data, param is boolean which is to fetch api data forcefully
     fun getRepositories(forceRefresh: Boolean = false): MutableLiveData<Resource<List<GitRepoData>?>> =
         object : NetworkBoundResource<List<GitRepoData>, List<GitRepoData>>(appRequestExecutors) {
             override fun saveCallResult(item: List<GitRepoData>) {
@@ -47,7 +47,7 @@ class TrendingRepository @Inject constructor(
     // method to check cache timeout of a request
     private fun isCacheTimedOut(key: String): Boolean {
         val lastFetched = timeOutMap[key]
-        val now = SystemClock.uptimeMillis()
+        val now = System.currentTimeMillis()
         if (lastFetched == null || (now - lastFetched) > TIMEOUT) {
             timeOutMap[key] = now
             return true
