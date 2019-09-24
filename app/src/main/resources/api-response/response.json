@@ -1,0 +1,70 @@
+[
+  {
+    "author": "denisidoro",
+    "name": "navi",
+    "avatar": "https://github.com/denisidoro.png",
+    "url": "https://github.com/denisidoro/navi",
+    "description": "An interactive cheatsheet tool for the command-line",
+    "language": "Shell",
+    "languageColor": "#89e051",
+    "stars": 1492,
+    "forks": 67,
+    "currentPeriodStars": 371,
+    "builtBy": [
+      {
+        "username": "denisidoro",
+        "href": "https://github.com/denisidoro",
+        "avatar": "https://avatars2.githubusercontent.com/u/3226564"
+      },
+      {
+        "username": "amacfie",
+        "href": "https://github.com/amacfie",
+        "avatar": "https://avatars1.githubusercontent.com/u/889657"
+      },
+      {
+        "username": "d3d1rty",
+        "href": "https://github.com/d3d1rty",
+        "avatar": "https://avatars3.githubusercontent.com/u/10838930"
+      }
+    ]
+  },
+  {
+    "author": "go-shiori",
+    "name": "shiori",
+    "avatar": "https://github.com/go-shiori.png",
+    "url": "https://github.com/go-shiori/shiori",
+    "description": "Simple bookmark manager built with Go",
+    "language": "JavaScript",
+    "languageColor": "#f1e05a",
+    "stars": 2855,
+    "forks": 133,
+    "currentPeriodStars": 134,
+    "builtBy": [
+      {
+        "username": "RadhiFadlillah",
+        "href": "https://github.com/RadhiFadlillah",
+        "avatar": "https://avatars2.githubusercontent.com/u/6129042"
+      },
+      {
+        "username": "s-frostick",
+        "href": "https://github.com/s-frostick",
+        "avatar": "https://avatars2.githubusercontent.com/u/37095987"
+      },
+      {
+        "username": "deanishe",
+        "href": "https://github.com/deanishe",
+        "avatar": "https://avatars0.githubusercontent.com/u/747913"
+      },
+      {
+        "username": "peteretelej",
+        "href": "https://github.com/peteretelej",
+        "avatar": "https://avatars2.githubusercontent.com/u/2271973"
+      },
+      {
+        "username": "muesli",
+        "href": "https://github.com/muesli",
+        "avatar": "https://avatars2.githubusercontent.com/u/146378"
+      }
+    ]
+  }
+]

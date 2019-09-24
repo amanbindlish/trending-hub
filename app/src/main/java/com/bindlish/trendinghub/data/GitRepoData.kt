@@ -27,6 +27,6 @@ data class GitRepoData(
     var stars: String,
     @SerializedName("forks")
     var forks: String,
-    var isExpanded: Boolean,
+    var isExpanded: Boolean = false,
     var createdAt: Long
 )
