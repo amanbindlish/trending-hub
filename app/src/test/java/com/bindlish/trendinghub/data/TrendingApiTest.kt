@@ -24,7 +24,7 @@ class TrendingApiTest : BaseApiTest<DataApi>() {
 
     @Test
     @Throws(IOException::class)
-    fun getNewsSource() {
+    fun getRepository() {
         enqueueResponse("response.json")
         val repoSource = MockUtils.getValue(dataApi.fetchRepositories()).data
         // Dummy request
