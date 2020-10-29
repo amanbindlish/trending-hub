@@ -16,8 +16,7 @@ A basic single screen android application which shows most trending repositories
 <div align="center">
   <p>
     <img src="/media/trending_hub_one.gif"/>	&nbsp;	&nbsp;	&nbsp;<img src="/media/trending_hub_two.gif"/>
-    <img src="/media/trending_hub_three.gif"/> 
-    <img src="/media/mvvm_data_flow.png"/>
+    <img src="/media/trending_hub_three.gif"/>
   </p>
 </div>
 
@@ -35,7 +34,11 @@ A basic single screen android application which shows most trending repositories
 
 #### App Architecture 
 Based on MVVM architecture and repository pattern, where database serves as a single source of truth for data.
-Refer media/mvvm_data_flow.png for diagram explanation.
+<div align="center">
+  <p>
+    <img src="/media/mvvm_data_flow.png"/>
+  </p>
+</div>
 
 #### App Specs
 - Minimum SDK 19
