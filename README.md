@@ -2,7 +2,21 @@
 
 A basic single screen android application which shows most trending repositories from github using its public api.
 
-Refer /media/trending_hub_one.gif, /media/trending_hub_two.gif, /media/trending_hub_three.gif for demo. 
+<div align="center">
+  <a href="https://amanbindlish.com">
+  <img alt="Logo" src="https://user-images.githubusercontent.com/50623363/82434256-2fd5d880-9ac5-11ea-9d2f-8d2db5d18340.png" width="100" />
+  </a>
+</div>
+
+<h2 align="center">
+  Github Trending Repositories - Kotlin
+</h2>
+
+#### App Screens
+<p>
+<img src="/media/trending_hub_one.gif" width="300" height="634">   <img src="/media/trending_hub_two.gif" width="300" height="634">
+<img src="/media/trending_hub_three.gif" width="300" height="634">    <img src="/media/mvvm_data_flow.png" width="550" height="500">
+</p>
 
 #### App Features
 * App fetches github trending repositories and displays in RecyclerView.
@@ -52,3 +66,8 @@ Refer media/mvvm_data_flow.png for diagram explanation.
 * <b>di</b> package containing classes for dependency injection (modules, components).
 * <b>ui</b> package containing classes for activity, fragments and adapter.
 * <b>viewmodel</b> package for viewmodel classes.
+
+
+You can reach out to me for any updates and explanation and can also create pull requests for your updates here.
+
+Follow me on [<img src="https://img.icons8.com/nolan/64/twitter-squared.png" width="28"/>](https://twitter.com/bindlishaman) [<img src="https://img.icons8.com/nolan/64/linkedin.png" width="28"/>](https://www.linkedin.com/in/amanbindlish/)
