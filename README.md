@@ -4,7 +4,7 @@ A basic single screen android application which shows most trending repositories
 
 <div align="center">
   <a href="https://amanbindlish.com">
-  <img alt="Logo" src="https://user-images.githubusercontent.com/50623363/82434256-2fd5d880-9ac5-11ea-9d2f-8d2db5d18340.png" width="100" />
+    <img alt="Logo" src="https://user-images.githubusercontent.com/50623363/82434256-2fd5d880-9ac5-11ea-9d2f-8d2db5d18340.png" width="100" />
   </a>
 </div>
 
@@ -13,10 +13,13 @@ A basic single screen android application which shows most trending repositories
 </h2>
 
 #### App Screens
-<p>
-<img src="/media/trending_hub_one.gif" width="300" height="634">   <img src="/media/trending_hub_two.gif" width="300" height="634">
-<img src="/media/trending_hub_three.gif" width="300" height="634">    <img src="/media/mvvm_data_flow.png" width="550" height="500">
-</p>
+<div align="center">
+  <p>
+    <img src="/media/trending_hub_one.gif"/>	&nbsp;	&nbsp;	&nbsp;<img src="/media/trending_hub_two.gif"/>
+    <img src="/media/trending_hub_three.gif"/> 
+    <img src="/media/mvvm_data_flow.png"/>
+  </p>
+</div>
 
 #### App Features
 * App fetches github trending repositories and displays in RecyclerView.
